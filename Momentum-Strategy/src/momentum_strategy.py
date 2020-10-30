@@ -244,25 +244,6 @@ if __name__ == '__main__':
 
     prices = preprocess_data(ticker_symbols, values='Adj Close', relative_path='../data/')
 
-
-    # ### TEST CODE ###
-    # column_names = {'Date': 'date', 'Open': 'open', 'High': 'high',
-    #                 'Low': 'low', 'Close': 'close', 'Adj Close': 'adj_close',
-    #                 'Volume': 'volume'}
-    #
-    # ticker_symbols = ['AAPL', 'AMD', 'AMZN', 'CSCO', 'FB', 'GOOG', 'IBM', 'INTC',
-    #                     'NFLX', 'NVDA', 'ORCL', 'SNAP', 'SQ', 'TEAM', 'TSLA']
-    #
-    # df = pd.DataFrame([])
-    #
-    # for ticker in ticker_symbols:
-    #     df_ticker = pd.read_csv(f"../data/{ticker}.csv", parse_dates=['Date'], index_col=False)
-    #     df_ticker.rename(columns=column_names, inplace=True)
-    #     df_ticker['ticker'] = ticker
-    #     df = df.append(df_ticker, ignore_index=True)
-    #
-    # prices = df.reset_index().pivot(index='date', columns='ticker', values='adj_close')
-    #
     # STEP 1: visualize stock data
     plt.figure()
     plot_ticker = 'AAPL'
@@ -348,98 +329,10 @@ if __name__ == '__main__':
         Annualized Rate of Return:  {portfolio_ret_annual_rate:.2f}%
     """)
 
-    # t-value and p-value for alpha 
+    # t-value and p-value for alpha
     t_value, p_value = analyze_alpha(expected_portfolio_returns_by_date)
     print(f"""
     Alpha analysis:
         t-value:        {t_value:.3f}
         p-value:        {p_value:.6f}
     """)
-
-    ###########################################################################
-
-    ### TEST CODE ###
-    # # specify filename and location
-    # filename = None
-    #
-    # # load the data
-    # df = pd.read_csv(filename, parse_dates=['date'], index_col=False)
-    #
-    # # pivot the data
-    # close = df.reset_index().pivot(index='date', columns='ticker', values='adj_close')
-    #
-    # # visualize stock
-    # apple_ticker = 'AAPL'
-    # project_helper.plot_stock(close[apple_ticker], '{} Stock'.format(apple_ticker))
-    #
-    # # resample the data and then visualize
-    # monthly_close = resample_prices(close)
-    # project_helper.plot_resampled_prices(
-    #     monthly_close.loc[:, apple_ticker],
-    #     close.loc[:, apple_ticker],
-    #     '{} Stock - Close Vs Monthly Close'.format(apple_ticker))
-    #
-    # # generate log returns
-    # monthly_close_returns = compute_log_returns(monthly_close)
-    # project_helper.plot_returns(
-    #     monthly_close_returns.loc[:, apple_ticker],
-    #     'Log Returns of {} Stock (Monthly)'.format(apple_ticker))
-    #
-    # # view previous month's and next month's returns
-    # prev_returns = shift_returns(monthly_close_returns, 1)
-    # lookahead_returns = shift_returns(monthly_close_returns, -1)
-    #
-    # project_helper.plot_shifted_returns(
-    #     prev_returns.loc[:, apple_ticker],
-    #     monthly_close_returns.loc[:, apple_ticker],
-    #     'Previous Returns of {} Stock'.format(apple_ticker))
-    # project_helper.plot_shifted_returns(
-    #     lookahead_returns.loc[:, apple_ticker],
-    #     monthly_close_returns.loc[:, apple_ticker],
-    #     'Lookahead Returns of {} Stock'.format(apple_ticker))
-
-    # # view get top n data
-    # top_bottom_n = 50
-    # df_long = get_top_n(prev_returns, top_bottom_n)
-    # df_short = get_top_n(-1*prev_returns, top_bottom_n)
-    # project_helper.print_top(df_long, 'Longed Stocks')
-    # project_helper.print_top(df_short, 'Shorted Stocks')
-
-    # # view portfolio returns data
-    # expected_portfolio_returns = portfolio_returns(df_long, df_short, lookahead_returns, 2*top_bottom_n)
-    # project_helper.plot_returns(expected_portfolio_returns.T.sum(), 'Portfolio Returns')
-
-    # # annualized rate of return
-    # expected_portfolio_returns_by_date = expected_portfolio_returns.T.sum().dropna()
-    # portfolio_ret_mean = expected_portfolio_returns_by_date.mean()
-    # portfolio_ret_ste = expected_portfolio_returns_by_date.sem()
-    # portfolio_ret_annual_rate = (np.exp(portfolio_ret_mean * 12) - 1) * 100
-    #
-    # print("""
-    # Mean:                       {:.6f}
-    # Standard Error:             {:.6f}
-    # Annualized Rate of Return:  {:.2f}%
-    # """.format(portfolio_ret_mean, portfolio_ret_ste, portfolio_ret_annual_rate))
-    #
-    # # Run the analyze alpha function to get a t-value and p-value
-    # t_value, p_value = analyze_alpha(expected_portfolio_returns_by_date)
-    # print("""
-    # Alpha analysis:
-    #  t-value:        {:.3f}
-    #  p-value:        {:.6f}
-    # """.format(t_value, p_value))
-
-    '''
-    Answer the Questions:
-
-    What p-value did you observe?
-    What does that indicate about your signal?
-
-    p-value: 0.073359
-
-    This indicates that although the signal is not statistically significant at
-    the 0.05 level, it is statistically significant at the 0.1 level. This
-    means that this signal has the potential to generate returns greater than
-    the mean return of the market.
-
-    '''

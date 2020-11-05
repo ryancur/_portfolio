@@ -1,5 +1,5 @@
 Purpose of this txt file is to explain the run time analysis
-(Worst-Case Big-O Notation) for each solution produced.
+(Worst-Case Big-O Notation) for each solution.
 
 ===============================================================================
 

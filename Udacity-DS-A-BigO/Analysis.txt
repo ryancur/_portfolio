@@ -1,0 +1,216 @@
+Purpose of this txt file is to explain the run time analysis
+(Worst-Case Big-O Notation) for each solution produced.
+
+===============================================================================
+
+Task0.py Run Time Analysis:
+
+get_first function:                             O(1)
+get_last function:                              O(1)
+
+Worst-Case Run-Time Complexity of Task0:        O(1)
+
+This task has a constant runtime because the run time complexity is not
+dependent on the size of the input data. Run time does not increase with the
+increase of n.
+
+===============================================================================
+
+Task1.py Run Time Analysis
+
+Functions Used:
+  num_unique_phone_numbers
+  get_unique_set (helper)
+
+Assumptions:
+  2 lists
+  Each list contains 100 rows of data
+  Interested in the first 2 columns of each row
+  For worst-case scenario - every number is unique
+
+get_unique_set():
+  line 1: set = empty_set                                   O(1)
+  line 2: for loop to iterate through list                  O(n)
+    line 3: var1 = idx
+    line 4: var2 = idx
+    line 5: add var1 to set
+    line 6: add var2 to set
+  line 7: return set                                        O(1)
+
+Estimated Big-O notation:                                   O(n)
+
+num_unique_phone_numbers():
+  line 1: set1 = get_unique_set()                           O(n)
+  line 2: set2 = get_unique_set()                           O(n)
+  line 3: union_set = set1 | set2                           O(n)
+  line 4: variable = len(union_set)                         O(1)
+  line 5: return variable                                   O(1)
+
+Estimated Big-O notation:                                   O(n)
+
+code outside of functions:
+  line 1: variable = num_unique_numbers()                   O(n)
+  line 2: print statement with variables                    O(1)
+
+Estimated Big-O notation:                                   O(n)
+
+Worst-Case Run-Time Complexity of Task1:                    O(n)
+
+The worst-case run-time complexity for Task1 is O(n) because the list is only
+iterated through once each time it is iterated through. Essentially, the
+total lines run are proportional to the length of the input.
+
+===============================================================================
+
+Task2.py Run Time Analysis
+
+Functions Used:
+  find_longest_duration
+
+Assumptions:
+  1 list
+  List contains 100 rows of data
+  Interested in the first two columns
+  For worst-case - every number is unique
+
+find_longest_duration():
+  line 1: create empty dictionary                           O(1)
+  line 2: for loop to iterate through records in list       O(n)
+    line 3: check if first column value in dict
+      line 4: add the duration
+    line 5: if first column value not in dict
+      line 6: add record and initialize with duration
+    line 7: check if second column value in dict
+      line 8: add the duration
+    line 9: if second column value not in dict
+      line 10: add record and initialize with duration
+  line 11: get phone num with max value from dict           O(n)
+  line 12: get max value from dict                          O(1)
+  line 13: return var1, var2                                O(1)
+
+Estimated Big-O notation:                                   O(n)
+
+code outside of functions:
+  line 1: var1, var2 = find_longest_duration()              O(n)
+  line 2: print statement with variables                    O(1)
+
+Estimated Big-O notation:                                   O(n)
+
+Worst-Case Run-Time Complexity of Task2:                    O(n)
+
+The worst-case run-time complexity for Task2 is O(n) in the
+find_longest_duration function. Here we iterate over the keys in the dictionary
+and if the number is in the dictionary, add the duration to the existing number
+or if it is not in the dictionary, then add the key and initialize it with the
+duration.
+
+===============================================================================
+
+Task3.py Run Time Analysis:
+
+Functions Used:
+  find_all_calls
+
+Assumptions:
+  1 list
+  List contains 100 rows of data
+  Interested in the first two columns
+  For worst-case - every number is from Bangalore
+
+Part A & B:
+find_all_calls():
+  line 1: create an empty set                               O(1)
+  line 2: initialize counter variable to 0                  O(1)
+  line 3: initialize counter variable to 0                  O(1)
+  line 4: for loop to iterate through call list             O(n)
+    line 5: check if caller from Bangalore
+      line 6: add 1 to counter variable
+      line 7: check receiver is landline
+        line 8: get receiver prefix using idx
+        line 9: add receiver prefix to set
+      line 10: check receiver prefix is mobile
+        line 11: add receiver prefix to set
+      line 12: check receiver is telemarketer
+        line 13: add receiver prefix to set
+      line 14: check if receiver is in Bangalore
+        line 15: add 1 to counter variable
+  line 16: sort the set (converts to list)                  O(nlogn)
+  line 17: calculate the pct_total                          O(1)
+  line 18: return the list of prefixes and pct_total        O(1)
+
+Estimated Big-O notation:                                   O(nlogn)
+
+code outside of functions:
+  line 1: var1, var2 = find_all_calls()                     O(nlogn)
+  line 2: print statement                                   O(1)
+  line 3: print prefix list                                 O(n)
+  line 4: print pct_total                                   O(1)
+
+Estimated Big-O notation:                                   O(nlogn)
+
+Worst-Case Run-Time Complexity of Task3:                    O(nlogn)
+
+The worst-case run-time complexity for Task3 is O(nlogn) due to the sorting
+function in find_all_calls(). The built-in sorted() function uses the Timsort
+sorting algorithm.
+
+===============================================================================
+
+Task4.py Run Time Analysis
+
+Functions Used:
+  get_separate_sets (helper)
+  get_aggregate_set (helper)
+  find_telemarketers
+
+Assumptions:
+  2 lists
+  Each list contains 100 rows of data
+  Interested in the first two columns of each list
+  For worst-case - every number is from a telemarketer
+
+get_separate_sets():
+  line 1: create an empty set                               O(1)
+  line 2: create an empty set                               O(1)
+  line 3: for loop to iterate through list                  O(n)
+    line 4: add incoming number to set
+    line 5: add receiving number to set
+  line 6: return both sets                                  O(1)
+
+Estimated Big-O notation:                                   O(n)
+
+get_aggregate_set():
+  line 1: create an empty set                               O(1)
+  line 2: for loop to iterate through list                  O(n)
+    line 3: add value at idx 0 to set
+    line 4: add value at idx 1 to set
+  line 5: return aggregated set                             O(1)
+
+Estimated Big-O notation:                                   O(n)
+
+find_telemarketers():
+  line 1: create an empty set                               O(1)
+  line 2: var1, var2 from helper function                   O(n)
+  line 3: var from helper function                          O(n)
+  line 4: for loop to iterate through set                   O(n)
+    line 5: conditional iterate through other sets          O(n)
+      line 6: add number to empty set
+  line 7: sort set - convert to list                        O(nlogn)
+  line 8: return list                                       O(1)
+
+Estimated Big-O notation                                    O(nlogn)
+
+code outside of functions:
+  line 1: variable = find_telemarketers()                   O(nlogn)
+  line 2: print statement                                   O(1)
+  line 3: print phone number                                O(n)
+
+Estimated Big-O notation:                                   O(nlogn)
+
+Worst-Case Run-Time Complexity of Task4:                    O(nlogn)
+
+The worst-case run-time complexity for Task4 is O(nlogn) due to the sorting
+function in find_telemarketers(). The built-in sorted() function uses the Timsort
+sorting algorithm.
+
+===============================================================================

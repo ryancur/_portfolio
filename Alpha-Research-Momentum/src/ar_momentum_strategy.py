@@ -6,7 +6,7 @@ from pandas._testing import assert_frame_equal
 
 def resample_prices(close_prices, freq='M'):
     """
-    Resample close prices for each ticker at specified frequency.
+    Resample close prices for each ticker at a specified frequency.
 
     Parameters
     ----------
@@ -14,7 +14,7 @@ def resample_prices(close_prices, freq='M'):
         Close prices for each ticker and date
     freq : str
         Frequency to sample at
-        http://pandas.pydata.org/pandas-docs/stable/timeseries.html#offset-aliases
+        https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html
 
     Returns
     -------
@@ -81,24 +81,6 @@ def get_top_n(prev_returns, top_n):
             if ticker in top:
                 new_df.loc[idx, ticker] = 1
     return new_df
-
-def get_top_n_better(prev_returns, top_n):
-    """
-    Select the top performing stocks
-
-    Parameters
-    ----------
-    prev_returns : DataFrame
-        Previous shifted returns for each ticker and date
-    top_n : int
-        The number of top performing stocks to get
-
-    Returns
-    -------
-    top_stocks : DataFrame
-        Top stocks for each ticker and date marked with a 1
-    """
-    return (prev_returns.rank(axis=1, ascending=False) <= top_n).astype(int)
 
 def portfolio_returns(df_long, df_short, lookahead_returns, n_stocks):
     """
@@ -204,49 +186,73 @@ def test_preprocess_data():
     """
     test_status_list = []
     test_counter = 0
-    total_tests = 5
-    df_1 = preprocess_data(['AAPL'], values='Adj Close', relative_path='../data/')
-    df_2 = preprocess_data(['AAPL'], values='Adj Close', relative_path='../data/')
-    df_3 = preprocess_data(['AMD'], values='Adj Close', relative_path='../data/')
+    total_tests = 3
+    df_1 = preprocess_data(['AAPL'], values='Adj Close',
+                            relative_path='../data/')
+    df_2 = preprocess_data(['AAPL'], values='Adj Close',
+                            relative_path='../data/')
+    df_3 = preprocess_data(['AMD'], values='Adj Close',
+                            relative_path='../data/')
 
     # test 1 - dataframes equal
-    assert_frame_equal(df_1, df_2)
+    try:
+        assert_frame_equal(df_1, df_2)
+        test_status_list.append('Test 1 Passed.')
+    except AssertionError:
+        test_status_list.append('Test 1 Failed.')
     test_counter += 1
-    test_status_list.append('Test 1 Passed.')
 
     # test 2 - dataframes not equal
     try:
         assert_frame_equal(df_1, df_3)
         test_status_list.append('Test 2 Failed.')
     except AssertionError:
-        test_counter += 1
         test_status_list.append('Test 2 Passed.')
+    test_counter += 1
 
     # test 3 - ticker not in files
-    assert (preprocess_data(['ABC'], values='Adj Close',
-                            relative_path='../data/') == None)
-    # test 4 - relative path
+    try:
+        assert (preprocess_data(['ABC'], values='Adj Close',
+                                relative_path='../data/') == None)
+        test_status_list.append('Test 3 Passed.')
+    except AssertionError:
+        test_status_list.append('Test 3 Failed.')
+    test_counter += 1
 
-    # test 5 - values column
-
-    # print(f"{test_counter}/{total_tests} Tests Passed.")
-    # if test_counter != total_tests:
-    #     for test in test_status_list:
-    #         print(test)
-    pass
+    print(f"{test_counter}/{total_tests} Tests Passed.")
+    if test_counter != total_tests:
+        for test in test_status_list:
+            print(test)
 
 
 if __name__ == '__main__':
     pd.set_option('max_columns', 100)
 
-    ticker_symbols = ['AAPL', 'AMD', 'AMZN', 'CSCO', 'FB', 'GOOG', 'IBM', 'INTC',
-                         'NFLX', 'NVDA', 'ORCL', 'SNAP', 'SQ', 'TEAM', 'TSLA']
+    ## Research Setup - TODO: Change per hypothesis and datasets used
+    freq_dict = {'D': ['Daily', 252], 'W': ['Weekly', 52], 'M': ['Monthly', 12],
+                'Q': ['Quarterly', 4], 'A': ['Annually', 1]}
 
-    prices = preprocess_data(ticker_symbols, values='Adj Close', relative_path='../data/')
-
-    # STEP 1: visualize stock data
-    plt.figure()
+    dataset_base_freq = 'D'
+    frequency = 'M'
     plot_ticker = 'AAPL'
+
+    ticker_symbols = ['AAPL', 'AMD', 'AMZN', 'CSCO', 'FB', 'GOOG', 'IBM',
+                    'INTC', 'NFLX', 'NVDA', 'ORCL', 'SNAP', 'SQ', 'TEAM',
+                    'TSLA']
+
+    base_freq = freq_dict[dataset_base_freq][0]
+    plt_time_interval = freq_dict[frequency][0]
+    ar_multiple = freq_dict[frequency][1]
+
+    ## STEP 0: Import datasets from CSV files and aggregate into a dataframe
+    prices = preprocess_data(ticker_symbols, values='Adj Close',
+                            relative_path='../data/')
+
+    start_date = prices.index.min()
+    end_date = prices.index.max()
+
+    ## STEP 1: visualize stock data
+    plt.figure()
     plt.plot(prices[plot_ticker])
     plt.title(f"{plot_ticker} Stock Price")
     plt.xlabel("Date")
@@ -254,30 +260,47 @@ if __name__ == '__main__':
     plt.tight_layout()
     plt.show()
 
-    # STEP 2: resample data
+    ## STEP 2: resample data
+    if frequency == dataset_base_freq:
+        resamp_prices = prices
+    else:
+        resamp_prices = resample_prices(prices, frequency)
 
-    # STEP 3: generate log returns
-    daily_close_returns = compute_log_returns(prices)
-
-    plot_ticker = 'AAPL'
-    plt_time_interval = "Daily"
     plt.figure()
-    plt.plot(daily_close_returns[plot_ticker])
+    plt.plot(prices[plot_ticker], color='blue', alpha=0.5, label='Close')
+    plt.plot(resamp_prices[plot_ticker], color='navy', alpha=0.6,
+                label=f'{plt_time_interval} Close')
+    plt.title(f"{plot_ticker} Stock - Close Vs {plt_time_interval} Close")
+    plt.xlabel("Date")
+    plt.ylabel(f"Price ($)")
+    plt.legend(loc='best')
+    plt.tight_layout()
+    plt.show()
+
+    ## STEP 3: generate log returns
+    returns = compute_log_returns(resamp_prices)
+
+    plt.figure()
+    plt.plot(returns[plot_ticker])
+    plt.hlines(y=0, xmin=returns.index.min(), xmax=returns.index.max(),
+                color='black', linestyles='--', lw=1)
     plt.title(f"{plot_ticker} {plt_time_interval} Log Returns")
     plt.xlabel("Date")
     plt.ylabel(f"{plt_time_interval} Returns")
     plt.tight_layout()
     plt.show()
 
-    # STEP 4: view previous month's and next month's returns
-    prev_returns = shift_returns(daily_close_returns, 1)
-    lookahead_returns = shift_returns(daily_close_returns, -1)
+    ## STEP 4: view previous timestep and next timestep returns
+    prev_returns = shift_returns(returns, 1)
+    lookahead_returns = shift_returns(returns, -1)
 
-    plot_ticker = 'AAPL'
-    plt_time_interval = "Daily"
     plt.figure()
-    plt.plot(prev_returns.loc[:, plot_ticker], color='blue', alpha=0.5, label='previous')
-    plt.plot(daily_close_returns.loc[:, plot_ticker], color='orange', alpha=0.5, label='actual')
+    plt.plot(prev_returns.loc[:, plot_ticker], color='blue', alpha=0.5,
+                label='Shifted Returns')
+    plt.plot(returns.loc[:, plot_ticker], color='gray', alpha=0.5,
+                label='Returns')
+    plt.hlines(y=0, xmin=returns.index.min(), xmax=returns.index.max(),
+                color='black', linestyles='--', lw=1)
     plt.title(f"Previous Returns of {plot_ticker} Stock")
     plt.xlabel("Date")
     plt.ylabel(f"{plt_time_interval} Returns")
@@ -285,11 +308,13 @@ if __name__ == '__main__':
     plt.tight_layout()
     plt.show()
 
-    plot_ticker = 'AAPL'
-    plt_time_interval = "Daily"
     plt.figure()
-    plt.plot(lookahead_returns.loc[:, plot_ticker], color='black', alpha=0.5, label='lookahead')
-    plt.plot(daily_close_returns.loc[:, plot_ticker], color='orange', alpha=0.5, label='actual')
+    plt.plot(lookahead_returns.loc[:, plot_ticker], color='blue', alpha=0.5,
+                label='Shifted Returns')
+    plt.plot(returns.loc[:, plot_ticker], color='gray', alpha=0.5,
+                label='Returns')
+    plt.hlines(y=0, xmin=returns.index.min(), xmax=returns.index.max(),
+                color='black', linestyles='--', lw=1)
     plt.title(f"Lookahead Returns of {plot_ticker} Stock")
     plt.xlabel("Date")
     plt.ylabel(f"{plt_time_interval} Returns")
@@ -297,30 +322,42 @@ if __name__ == '__main__':
     plt.tight_layout()
     plt.show()
 
-    # STEP 5: get the top n stocks and visualize
+    ## STEP 5: get the top n stocks and visualize
     top_bottom_n = 2
     df_long = get_top_n(prev_returns, top_bottom_n)
     df_short = get_top_n(-1*prev_returns, top_bottom_n)
-    # print('Longed Stocks', df_long)
-    # print('Shorted Stocks', df_short)
+    print('Longed Stocks\n', df_long)
+    print('Shorted Stocks\n', df_short)
 
-    # STEP 6: get portfolio returns and visualize
-    expected_portfolio_returns = portfolio_returns(df_long, df_short, lookahead_returns, 2*top_bottom_n)
-
+    ## STEP 6: get portfolio returns and visualize
+    expected_portfolio_returns = portfolio_returns(df_long, df_short,
+                                    lookahead_returns, 2*top_bottom_n)
 
     plt.figure()
     plt.plot(expected_portfolio_returns.T.sum())
-    plt.title(f"Portfolio Returns")
+    plt.hlines(y=0, xmin=returns.index.min(), xmax=returns.index.max(),
+                color='black', linestyles='--', lw=1)
+    plt.title(f"Expected Portfolio Returns")
     plt.xlabel("Date")
     plt.ylabel("Returns")
     plt.tight_layout()
     plt.show()
 
-    # STEP 7: annualized rate of return
+    ## STEP 7: annualized rate of return
     expected_portfolio_returns_by_date = expected_portfolio_returns.T.sum().dropna()
     portfolio_ret_mean = expected_portfolio_returns_by_date.mean()
     portfolio_ret_ste = expected_portfolio_returns_by_date.sem()
-    portfolio_ret_annual_rate = (np.exp(portfolio_ret_mean * 12) - 1) * 100
+    portfolio_ret_annual_rate = (np.exp(portfolio_ret_mean * ar_multiple) - 1) * 100
+
+    print(f"""
+    Research Information:
+        Dataset Start Date:             {start_date}
+        Dataset End Date:               {end_date}
+        Dataset Base Time Interval:     {base_freq}
+        Resampled Time Interval:        {plt_time_interval}
+        Asset Sample:
+            {ticker_symbols}
+    """)
 
     print(f"""
     Expected Portfolio Returns by Date:

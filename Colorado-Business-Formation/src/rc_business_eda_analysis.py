@@ -711,8 +711,3 @@ if __name__ == '__main__':
     linear_regression(df_gdp_grand_junc, 'year', 'real_per_capita_gdp', 'Grand Junction Real GDP Per Capita 2001-2017', 'Year', 'Real GDP Per Capita (chained 2009 dollars)', y_min=20000, y_max=72000)
     simple_line_plot(df_gdp_grand_junc, 'year', 'real_per_capita_gdp', 'Year', 'Real GDP Per Capita (chained 2009 dollars)', 'Grand Junction Real GDP Per Capita 2001-2017', label_vert='vertical', y_min=20000, y_max=72000)
     simple_line_plot(df_gdp_grand_junc, 'year', 'real_per_capita_gdp', 'Year', 'Real GDP Per Capita (chained 2009 dollars)', 'Grand Junction Real GDP Per Capita 2001-2017 Zoomed', label_vert='vertical')
-
-
-
-
-    ###########################################################################

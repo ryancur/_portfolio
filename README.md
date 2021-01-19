@@ -31,6 +31,7 @@ Project 1 for Udacity's Data Structures and Algorithms course. Tasked with solvi
 
 Technologies: Python
 
+BigO Analysis 
 
 Data: Available
 

@@ -24,14 +24,15 @@ Code: Available
 
 April 2020
 
-![https://miro.medium.com/max/552/1*j8fUQjaUlmrQEN_udU0_TQ.jpeg](images/BigO_notation.jpeg)
+![BigO Chart](images/BigO_notation.jpeg)
+Big-O Complexity Chart: http://bigocheatsheet.com/
 
 Project 1 for Udacity's Data Structures and Algorithms course. Tasked with solving 5 programming challenges and then calculating the BigO notation for each solution.
 
 
 Technologies: Python
 
-BigO Analysis 
+BigO Analysis
 
 Data: Available
 

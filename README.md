@@ -47,8 +47,7 @@ April 2020 (original)
 
 Updated: November 2020 (Data and Code)
 
-![Image](images/)
-Source:
+![Apple & Exxon](images/stock_price_AAPL_XOM.png)
 
 Description
 
@@ -57,4 +56,4 @@ Technologies:
 
 Data: Available
 
-Code: Available 
+Code: Available

@@ -25,7 +25,7 @@ Code: Available
 April 2020
 
 ![BigO Chart](images/BigO_notation.jpeg)
-Big-O Complexity Chart: http://bigocheatsheet.com/
+Source: http://bigocheatsheet.com/
 
 Project 1 for Udacity's Data Structures and Algorithms course. Tasked with solving five (5) programming challenges and then calculating the BigO notation for each solution.
 
@@ -38,3 +38,23 @@ BigO Analysis
 Data: Available
 
 Code: Available
+
+---
+
+### [Alpha Research - Momentum](https://github.com/ryancur/Alpha-Research-Momentum)
+
+April 2020 (original)
+
+Updated: November 2020 (Data and Code)
+
+![Image](images/)
+Source:
+
+Description
+
+Technologies:
+
+
+Data: Available
+
+Code: Available 

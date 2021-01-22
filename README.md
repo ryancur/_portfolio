@@ -53,7 +53,7 @@ Description
 
 Technologies: Python, Pandas, Numpy, Matplotlib, Scipy
 
-
+Financial Trading | Hypothesis Testing | Statistical Programming | Data Visualization 
 
 
 Data: Available

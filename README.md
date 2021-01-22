@@ -6,7 +6,6 @@ April 2019
 
 ![](images/Top3EntityTypesofAllBusinessesFormed2001-2017.png)
 
-
 Analyzed the number of new businesses formed in Colorado between 2001-2017. Compared the growth in new businesses to real GDP per capita across the state and seven (7) metro areas.
 
 
@@ -50,7 +49,7 @@ Updated: November 2020 (Data and Code)
 
 ![Apple & Exxon](images/stock_price_AAPL_XOM.png)
 
-Project 1 for Udacity's AI for Trading course. Built an algorithmic trading research script using a cross-sectional momentum strategy. The portfolio returns were assessed using hypothesis testing.
+Project 1 for Udacity's AI for Trading course. Built a systemic trading research script using a cross-sectional momentum strategy. The portfolio returns were assessed using hypothesis testing.
 
 
 Technologies: Python, Pandas, Numpy, Matplotlib, Scipy

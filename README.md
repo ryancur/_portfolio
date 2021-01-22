@@ -51,7 +51,9 @@ Updated: November 2020 (Data and Code)
 
 Description
 
-Technologies:
+Technologies: Python, Pandas, Numpy, Matplotlib, Scipy
+
+
 
 
 Data: Available

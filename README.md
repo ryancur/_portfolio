@@ -49,11 +49,11 @@ Updated: November 2020 (Data and Code)
 
 ![Apple & Exxon](images/stock_price_AAPL_XOM.png)
 
-Description
+Project 1 for Udacity's AI for Trading course. Built an algorithmic trading research script using a cross-sectional momentum strategy. The portfolio returns were assessed using hypothesis testing.
 
 Technologies: Python, Pandas, Numpy, Matplotlib, Scipy
 
-Financial Trading | Hypothesis Testing | Statistical Programming | Data Visualization 
+Financial Trading | Hypothesis Testing | Statistical Programming | Data Visualization
 
 
 Data: Available

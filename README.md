@@ -1,17 +1,19 @@
 # Portfolio
 
-### [Colorado Business Formation and Economic Exploratory Analysis](https://github.com/ryancur/Colorado-Business-Formation.git)
+### [Alpha Research - Momentum](https://github.com/ryancur/Alpha-Research-Momentum)
 
-April 2019
+April 2020 (original)
 
-![](images/Top3EntityTypesofAllBusinessesFormed2001-2017.png)
+Updated: November 2020 (Data and Code)
 
-Analyzed the number of new businesses formed in Colorado between 2001-2017. Compared the growth in new businesses to real GDP per capita across the state and seven (7) metro areas.
+![Apple & Exxon](images/stock_price_AAPL_XOM.png)
+
+Project 1 for Udacity's AI for Trading course. Built a trading research script using a cross-sectional momentum strategy. The portfolio returns were assessed using hypothesis testing.
 
 
-Technologies: Python, Pandas, Numpy, Matplotlib, Scikit-learn, Statsmodels, Jupyter Notebook
+Technologies: Python, Pandas, Numpy, Matplotlib, Scipy
 
-Linear Regression | Data Visualization | Data Cleaning
+Financial Trading | Hypothesis Testing | Statistical Programming | Data Visualization
 
 
 Data: Available
@@ -41,20 +43,18 @@ Code: Available
 
 ---
 
-### [Alpha Research - Momentum](https://github.com/ryancur/Alpha-Research-Momentum)
+### [Colorado Business Formation and Economic Exploratory Analysis](https://github.com/ryancur/Colorado-Business-Formation.git)
 
-April 2020 (original)
+April 2019
 
-Updated: November 2020 (Data and Code)
+![](images/Top3EntityTypesofAllBusinessesFormed2001-2017.png)
 
-![Apple & Exxon](images/stock_price_AAPL_XOM.png)
-
-Project 1 for Udacity's AI for Trading course. Built a trading research script using a cross-sectional momentum strategy. The portfolio returns were assessed using hypothesis testing.
+Analyzed the number of new businesses formed in Colorado between 2001-2017. Compared the growth in new businesses to real GDP per capita across the state and seven (7) metro areas.
 
 
-Technologies: Python, Pandas, Numpy, Matplotlib, Scipy
+Technologies: Python, Pandas, Numpy, Matplotlib, Scikit-learn, Statsmodels, Jupyter Notebook
 
-Financial Trading | Hypothesis Testing | Statistical Programming | Data Visualization
+Linear Regression | Data Visualization | Data Cleaning
 
 
 Data: Available

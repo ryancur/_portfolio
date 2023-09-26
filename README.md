@@ -8,7 +8,7 @@ Original Project Repo (GitLab) - [Car.ai](https://gitlab.com/smalhadid/carai)
 
 Updated: Currently Updating
 
-![CarAI Main Page](images/CarAI-main-page.png)
+[![CarAI Main Page](images/CarAI-main-page.png)](https://github.com/ryancur/CarAI)
 
 Technologies: Python, Django, React, Microservices, Docker, PostgreSQL, Pandas, Numpy, Scikit-learn
 

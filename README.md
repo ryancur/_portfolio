@@ -8,17 +8,13 @@ Original Project Repo (GitLab) - [Car.ai](https://gitlab.com/smalhadid/carai)
 
 Updated: Currently Updating
 
-![Coming Soon]()
-
-Currently updating...
-
+![CarAI Main Page](images/CarAI-main-page.png)
 
 Technologies: Python, Django, React, Microservices, Docker, PostgreSQL, Pandas, Numpy, Scikit-learn
 
-Microservices | REST APIs | 
+Microservices | REST APIs | Backend Development | Frontend Development | Machine Learning
 
-
-Data: Available
+Data: Available (for ML model)
 
 Code: Available
 

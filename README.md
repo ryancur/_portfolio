@@ -20,28 +20,6 @@ Code: Available
 
 ---
 
-### [Tasktic](https://github.com/ryancur/Tasktic)
-
-Original Project: June 2023
-
-Original Project Repo (GitLab) - [Task Boss](https://gitlab.com/the-brain-cell/task-boss)
-
-Updated: Currently Updating
-
-![Coming Soon]()
-
-Currently updating...
-
-
-Technologies: Python, FastAPI, React, Redux Toolkit, MongoDB, Docker
-
-REST API | 
-
-
-Code: Available
-
----
-
 ### [Alpha Research - Momentum](https://github.com/ryancur/Alpha-Research-Momentum)
 
 April 2020 (original)
